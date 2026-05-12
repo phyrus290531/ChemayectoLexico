@@ -38,9 +38,7 @@ class LexCoreEngineApp extends StatelessWidget {
           secondary: Color(0xFF00BCD4),
           error: Color(0xFFFF1744),
         ),
-        textTheme: GoogleFonts.interTextTheme(
-          ThemeData.dark().textTheme,
-        ),
+        textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
       ),
       home: const AnalyzerScreen(),
     );
@@ -200,9 +198,7 @@ class _AnalyzerScreenState extends State<AnalyzerScreen>
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20),
-              child: isWide
-                  ? _buildWideLayout()
-                  : _buildNarrowLayout(),
+              child: isWide ? _buildWideLayout() : _buildNarrowLayout(),
             ),
           ),
         ],
@@ -216,12 +212,7 @@ class _AnalyzerScreenState extends State<AnalyzerScreen>
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: const BoxDecoration(
         color: Color(0xFF0E1017),
-        border: Border(
-          bottom: BorderSide(
-            color: Color(0xFF1E2028),
-            width: 1,
-          ),
-        ),
+        border: Border(bottom: BorderSide(color: Color(0xFF1E2028), width: 1)),
       ),
       child: Row(
         children: [
@@ -247,7 +238,7 @@ class _AnalyzerScreenState extends State<AnalyzerScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'LEX-CORE ENGINE',
+                'ChemaYecto',
                 style: GoogleFonts.orbitron(
                   color: Colors.white,
                   fontSize: isWide ? 16 : 14,
@@ -265,58 +256,8 @@ class _AnalyzerScreenState extends State<AnalyzerScreen>
               ),
             ],
           ),
-          const Spacer(),
-          // Navegación
-          if (isWide) _buildNavItems(),
-          if (isWide) const SizedBox(width: 24),
-          // Íconos de la derecha
-          _buildIconButton(Icons.terminal_rounded),
-          const SizedBox(width: 4),
-          _buildIconButton(Icons.settings_outlined),
-          const SizedBox(width: 4),
-          _buildIconButton(Icons.notifications_none_rounded),
         ],
       ),
-    );
-  }
-
-  /// Navegación horizontal con pestañas
-  Widget _buildNavItems() {
-    final items = ['Analyzer', 'Engine', 'Optimizer', 'Docs'];
-    return Row(
-      children: List.generate(items.length, (index) {
-        final isSelected = _selectedNavIndex == index;
-        return GestureDetector(
-          onTap: () {
-            setState(() => _selectedNavIndex = index);
-          },
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 4),
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-            decoration: BoxDecoration(
-              color: isSelected
-                  ? const Color(0xFF00E676).withValues(alpha: 0.1)
-                  : Colors.transparent,
-              borderRadius: BorderRadius.circular(6),
-              border: isSelected
-                  ? Border.all(
-                      color: const Color(0xFF00E676).withValues(alpha: 0.3),
-                    )
-                  : null,
-            ),
-            child: Text(
-              items[index],
-              style: TextStyle(
-                color: isSelected
-                    ? const Color(0xFF00E676)
-                    : const Color(0xFF5A5E6A),
-                fontSize: 13,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-              ),
-            ),
-          ),
-        );
-      }),
     );
   }
 
@@ -327,15 +268,9 @@ class _AnalyzerScreenState extends State<AnalyzerScreen>
       decoration: BoxDecoration(
         color: const Color(0xFF1A1D23),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: const Color(0xFF2A2D35),
-        ),
+        border: Border.all(color: const Color(0xFF2A2D35)),
       ),
-      child: Icon(
-        icon,
-        color: const Color(0xFF5A5E6A),
-        size: 18,
-      ),
+      child: Icon(icon, color: const Color(0xFF5A5E6A), size: 18),
     );
   }
 
@@ -415,12 +350,14 @@ class _AnalyzerScreenState extends State<AnalyzerScreen>
         : (_errores.isEmpty ? 'Válido' : 'Con errores');
     final estadoColor = !_analisisRealizado
         ? const Color(0xFF5A5E6A)
-        : (_errores.isEmpty ? const Color(0xFF00E676) : const Color(0xFFFF1744));
+        : (_errores.isEmpty
+              ? const Color(0xFF00E676)
+              : const Color(0xFFFF1744));
     final estadoIcono = !_analisisRealizado
         ? Icons.remove_circle_outline
         : (_errores.isEmpty
-            ? Icons.check_circle_outline_rounded
-            : Icons.cancel_outlined);
+              ? Icons.check_circle_outline_rounded
+              : Icons.cancel_outlined);
 
     return GridView.count(
       crossAxisCount: 2,
@@ -445,8 +382,8 @@ class _AnalyzerScreenState extends State<AnalyzerScreen>
           color: _errores.isEmpty && _analisisRealizado
               ? const Color(0xFF00E676)
               : (_errores.isNotEmpty
-                  ? const Color(0xFFFF1744)
-                  : const Color(0xFF5A5E6A)),
+                    ? const Color(0xFFFF1744)
+                    : const Color(0xFF5A5E6A)),
         ),
         SummaryCard(
           titulo: 'LÍNEAS ANALIZADAS',
